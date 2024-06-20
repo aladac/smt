@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency 'activesupport', '~> 7.1.3.4'
+  spec.add_dependency 'colorize', '~> 1.1.0'
   spec.add_dependency 'pry', '~> 0.14.2'
   spec.add_dependency 'rubocop', '~> 1.64.1'
   # For more information and examples about making a new gem, check out our
