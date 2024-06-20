@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "smt/version"
+require_relative 'smt/version'
 
 module Smt
   class Error < StandardError; end
