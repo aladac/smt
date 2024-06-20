@@ -1,8 +1,49 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'bundler'
+require 'active_support/all'
+require 'colorize'
 require 'pry'
-Bundler.require
+require 'optparse'
 
-binding.pry
+options = OptionParser.new do |opts|
+  opts.banner = 'Usage: smt [options]'
+
+  opts.on('-h', '--help', 'Display this screen') do
+    puts opts
+    exit
+  end
+
+  opts.on('-t', '--time TIME', 'Time to convert') do |time|
+    @input = time
+  end
+
+  opts.on('-f', '--format FORMAT', 'Time format') do |fmt|
+    @format = fmt
+  end
+
+  opts.on('-l', '--list', 'List all timezones') do
+    puts ActiveSupport::TimeZone.all.map(&:name)
+    exit
+  end
+end
+
+@format ||= '%Y-%m-%d %H:%M:%S'
+
+options.parse!
+
+config = File.exist?("#{Dir.home}/.smtrc.yml") && YAML.load_file("#{Dir.home}/.smtrc.yml")
+
+time = @input ? Time.parse(@input) : Time.current
+
+return unless config
+
+max_length = config.map { |entry| entry[:time_zone].length }.max
+
+config.each do |entry|
+  time_display = time.in_time_zone(entry[:time_zone]).strftime(@format)
+  formatted_time_zone = time.strftime(entry[:time_zone]).rjust(max_length)
+  formatted_time_display = time_display # .rjust(max_length) # Assuming time_display needs similar treatment
+
+  puts "#{formatted_time_zone} #{formatted_time_display}".colorize(entry[:color].to_sym)
+end
