@@ -2,9 +2,11 @@
 # frozen_string_literal: true
 
 require 'active_support/all'
+require 'bundler'
 require 'colorize'
-require 'pry'
 require 'optparse'
+
+Bundler.require
 
 options = OptionParser.new do |opts|
   opts.banner = 'Usage: smt [options]'
@@ -24,6 +26,11 @@ options = OptionParser.new do |opts|
 
   opts.on('-l', '--list', 'List all timezones') do
     puts ActiveSupport::TimeZone.all.map(&:name)
+    exit
+  end
+
+  opts.on '-v', '--version', 'Show version' do
+    puts Smt::VERSION
     exit
   end
 end
