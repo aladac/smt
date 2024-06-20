@@ -35,7 +35,7 @@ module Smt
     end
 
     def for_parse
-      OptionParser.new do |opts|
+      parser = OptionParser.new do |opts|
         opts.banner = 'Usage: smt [options]'
 
         help_opts(opts)
@@ -43,6 +43,18 @@ module Smt
         format_opts(opts)
         list_opts(opts)
       end
+
+      {
+        parser: parser, input: @input, format: @format
+      }
+    end
+
+    def parse!
+      for_parse[:parser].parse!
+
+      [
+        for_parse[:input], for_parse[:format]
+      ]
     end
   end
 end
