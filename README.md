@@ -1,4 +1,5 @@
 # Smt
+[![Ruby](https://github.com/aladac/smt/actions/workflows/main.yml/badge.svg)](https://github.com/aladac/smt/actions/workflows/main.yml)
 
 TODO: Delete this and the text below, and describe your gem
 
