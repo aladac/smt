@@ -93,8 +93,8 @@ PLATFORMS
 DEPENDENCIES
   pry (~> 0.14.2)
   rake (~> 13.0)
-  rspec (~> 3.0)
-  rubocop (~> 1.21)
+  rspec (~> 3.13.0)
+  rubocop (~> 1.64.1)
   simplecov (~> 0.22.0)
   smt!
 

@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Smt do
-  it 'has a version number' do
-    expect(Smt::VERSION).not_to be nil
-  end
+ARGV = %w[-t 12:00] # rubocop:disable Style/MutableConstant
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+RSpec.describe Smt::Options do
+  it 'parses the time option' do
+    Smt::Options.new.parse!
   end
 end
