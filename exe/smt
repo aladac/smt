@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'active_support/all'
+require 'bundler'
+require 'colorize'
+require 'optparse'
+require 'smt'
+
+@input, @format = *Smt::Options.new.parse!
+
+@format ||= '%Y-%m-%d %H:%M:%S'
+
+config = Smt::Config.load
+
+time = @input ? Time.parse(@input) : Time.current
+
+return unless config
+
+max_length = config.map { |entry| entry[:time_zone].length }.max
+
+config.each do |entry|
+  Smt::Display.show(entry, @format, max_length, time)
+end
