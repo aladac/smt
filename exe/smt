@@ -5,8 +5,7 @@ require 'active_support/all'
 require 'bundler'
 require 'colorize'
 require 'optparse'
-
-Bundler.require
+require 'smt'
 
 @input, @format = *Smt::Options.new.parse!
 
