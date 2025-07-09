@@ -6,29 +6,30 @@ module Smt
       Usage: smt [options]
     BANNER
 
-    def initialize; end
+    def initialize
+    end
 
     def time_opts(opts)
-      opts.on('-t', '--time TIME', 'Time to convert') do |time|
+      opts.on("-t", "--time TIME", "Time to convert") do |time|
         @input = time
       end
     end
 
     def format_opts(opts)
-      opts.on('-f', '--format FORMAT', 'Time format') do |fmt|
+      opts.on("-f", "--format FORMAT", "Time format") do |fmt|
         @format = fmt
       end
     end
 
     def help_opts(opts)
-      opts.on('-h', '--help', 'Display this screen') do
+      opts.on("-h", "--help", "Display this screen") do
         puts opts
         exit
       end
     end
 
     def list_opts(opts)
-      opts.on('-l', '--list', 'List all timezones') do
+      opts.on("-l", "--list", "List all timezones") do
         puts ActiveSupport::TimeZone.all.map(&:name)
         exit
       end
@@ -36,7 +37,7 @@ module Smt
 
     def for_parse
       parser = OptionParser.new do |opts|
-        opts.banner = 'Usage: smt [options]'
+        opts.banner = "Usage: smt [options]"
 
         help_opts(opts)
         time_opts(opts)
