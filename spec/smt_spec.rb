@@ -5,7 +5,7 @@ require "colorize"
 RSpec.describe Smt, :verified do
   describe "VERSION" do
     it "is defined" do
-      expect(Smt::VERSION).to eq("0.2.4")
+      expect(Smt::VERSION).to eq("0.2.5")
     end
   end
 
