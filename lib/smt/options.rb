@@ -35,6 +35,13 @@ module Smt
       end
     end
 
+    def version_opts(opts)
+      opts.on("-v", "--version", "Show version") do
+        puts Smt::VERSION
+        exit
+      end
+    end
+
     def for_parse
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: smt [options]"
@@ -43,6 +50,7 @@ module Smt
         time_opts(opts)
         format_opts(opts)
         list_opts(opts)
+        version_opts(opts)
       end
 
       {

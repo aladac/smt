@@ -7,5 +7,6 @@ require_relative "smt/display"
 
 module Smt
   class Error < StandardError; end
-  # Your code goes here...
+
+  DEFAULT_FORMAT = "%Y-%m-%d %H:%M:%S"
 end

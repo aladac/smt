@@ -9,16 +9,25 @@ require "smt"
 
 @input, @format = *Smt::Options.new.parse!
 
-@format ||= "%Y-%m-%d %H:%M:%S"
+@format ||= Smt::DEFAULT_FORMAT
 
 config = Smt::Config.load
 
-time = @input ? Time.parse(@input) : Time.current
+time = if @input
+  begin
+    Time.parse(@input)
+  rescue ArgumentError
+    warn "Error: invalid time format '#{@input}'"
+    exit 1
+  end
+else
+  Time.current
+end
 
 return unless config
 
 max_length = config.map { |entry| entry[:label].length }.max
 
 config.each do |entry|
-  Smt::Display.show(entry, @format, max_length, time)
+  Smt::Display.show(entry: entry, format: @format, max_length: max_length, time: time)
 end

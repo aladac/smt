@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+require "simplecov"
+SimpleCov.start
+
+require "active_support/all"
+require "optparse"
 require "smt"
 
 RSpec.configure do |config|
