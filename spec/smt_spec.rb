@@ -78,17 +78,44 @@ RSpec.describe Smt::Options, :verified do
 end
 
 RSpec.describe Smt::Display, :verified do
-  describe ".show" do
-    it "outputs formatted timezone line" do
-      entry = {time_zone: "UTC", label: "UTC", color: "white"}
-      time = Time.utc(2024, 1, 15, 12, 0, 0)
+  describe ".table" do
+    let(:time) { Time.utc(2024, 1, 15, 12, 0, 0) }
+
+    it "renders a table with box-drawing borders" do
+      entries = [{time_zone: "UTC", label: "UTC", color: "white"}]
 
       output = capture_output do
-        Smt::Display.show(entry: entry, format: "%H:%M:%S", max_length: 5, time: time)
+        Smt::Display.table(entries: entries, format: "%H:%M:%S", time: time)
       end
 
+      expect(output).to include("┌")
+      expect(output).to include("└")
       expect(output).to include("12:00:00")
+    end
+
+    it "includes emoji in table rows" do
+      entries = [{time_zone: "UTC", label: "UTC", color: "white", emoji: "🌍"}]
+
+      output = capture_output do
+        Smt::Display.table(entries: entries, format: "%H:%M:%S", time: time)
+      end
+
+      expect(output).to include("🌍")
       expect(output).to include("UTC")
+    end
+
+    it "renders mid-borders between multiple rows" do
+      entries = [
+        {time_zone: "UTC", label: "UTC", color: "white"},
+        {time_zone: "US/Eastern", label: "Eastern", color: "red"}
+      ]
+
+      output = capture_output do
+        Smt::Display.table(entries: entries, format: "%H:%M:%S", time: time)
+      end
+
+      expect(output).to include("├")
+      expect(output).to include("┼")
     end
   end
 

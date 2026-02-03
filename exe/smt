@@ -26,8 +26,4 @@ end
 
 return unless config
 
-max_length = config.map { |entry| entry[:label].length }.max
-
-config.each do |entry|
-  Smt::Display.show(entry: entry, format: @format, max_length: max_length, time: time)
-end
+Smt::Display.table(entries: config, format: @format, time: time)
