@@ -1,40 +1,56 @@
-# Smt
+# smt - Show Me Time
+
 [![Ruby](https://github.com/aladac/smt/actions/workflows/main.yml/badge.svg)](https://github.com/aladac/smt/actions/workflows/main.yml)
 
-TODO: Delete this and the text below, and describe your gem
+Too lazy to switch from the terminal to check the time? Same. `smt` displays the current time across multiple timezones in a neat table, right where you already are.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/smt`. To experiment with that code, run `bin/console` for an interactive prompt.
+```
+┌────┬────────────┬─────────────────────┐
+│ 🇵🇱 │ Warsaw     │ 2026-02-04 18:30:00 │
+├────┼────────────┼─────────────────────┤
+│ 🇬🇧 │ London     │ 2026-02-04 17:30:00 │
+├────┼────────────┼─────────────────────┤
+│ 🇺🇸 │ New York   │ 2026-02-04 12:30:00 │
+└────┴────────────┴─────────────────────┘
+```
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+```
+gem install smt
+```
 
-Install the gem and add to the application's Gemfile by executing:
+## Configuration
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Create a `~/.smtrc.yml` file with your timezones:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+```yaml
+- emoji: "🇵🇱"
+  label: Warsaw
+  time_zone: Europe/Warsaw
+  color: red
+- emoji: "🇬🇧"
+  label: London
+  time_zone: Europe/London
+  color: blue
+- emoji: "🇺🇸"
+  label: New York
+  time_zone: America/New_York
+  color: green
+```
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Labels support `strftime` format codes, so you can use dynamic values like `%A` for the day name.
 
 ## Usage
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/smt. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/smt/blob/main/CODE_OF_CONDUCT.md).
+```
+smt                          # show current time
+smt -t "2026-02-04 15:00"   # convert a specific time
+smt -f "%H:%M"              # custom time format (default: %Y-%m-%d %H:%M:%S)
+smt -l                      # list all available timezones
+smt -v                      # show version
+```
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Smt project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/smt/blob/main/CODE_OF_CONDUCT.md).
+[MIT](https://opensource.org/licenses/MIT)
