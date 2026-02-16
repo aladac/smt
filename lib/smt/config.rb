@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "yaml"
+require 'yaml'
 
 module Smt
   class Config
-    CONFIG_PATH = File.join(Dir.home, ".smtrc.yml").freeze
+    CONFIG_PATH = File.join(Dir.home, '.smtrc.yml').freeze
 
     def self.load
       return unless File.exist?(CONFIG_PATH)

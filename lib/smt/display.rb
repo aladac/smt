@@ -3,9 +3,9 @@
 module Smt
   class Display
     BOX = {
-      tl: "┌", tr: "┐", bl: "└", br: "┘",
-      h: "─", v: "│",
-      lm: "├", rm: "┤", tm: "┬", bm: "┴", cross: "┼"
+      tl: '┌', tr: '┐', bl: '└', br: '┘',
+      h: '─', v: '│',
+      lm: '├', rm: '┤', tm: '┬', bm: '┴', cross: '┼'
     }.freeze
 
     def self.table(entries:, format:, time:)
@@ -43,7 +43,7 @@ module Smt
     end
 
     def self.row_line(row, ew, lw, tw)
-      emoji_cell = row[:emoji] ? " #{row[:emoji]} " : " " * (ew + 2)
+      emoji_cell = row[:emoji] ? " #{row[:emoji]} " : ' ' * (ew + 2)
       label_cell = " #{row[:label].ljust(lw)} "
       time_cell = " #{row[:time].ljust(tw)} "
 

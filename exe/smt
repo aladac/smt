@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "active_support/all"
-require "bundler"
-require "colorize"
-require "optparse"
-require "smt"
+require 'active_support/all'
+require 'bundler'
+require 'colorize'
+require 'optparse'
+require 'smt'
 
 @input, @format = *Smt::Options.new.parse!
 
@@ -14,15 +14,15 @@ require "smt"
 config = Smt::Config.load
 
 time = if @input
-  begin
-    Time.parse(@input)
-  rescue ArgumentError
-    warn "Error: invalid time format '#{@input}'"
-    exit 1
-  end
-else
-  Time.current
-end
+         begin
+           Time.parse(@input)
+         rescue ArgumentError
+           warn "Error: invalid time format '#{@input}'"
+           exit 1
+         end
+       else
+         Time.current
+       end
 
 return unless config
 
